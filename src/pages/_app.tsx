@@ -1,21 +1,10 @@
+import { BaseLayout } from '../components/layout/base/Base';
 import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
-import Header from '../components/layout/Header'
+import { AppPropsWithLayout } from '../utils/types'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return(
-    <>
-      <Header />
-
-      <main>
-        <Component {...pageProps} />
-      </main>
-
-      <footer>
-        <p>Developed by GyzzakO</p>
-      </footer>
-    </>
-  )
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => <BaseLayout>{page}</BaseLayout>);
+  return getLayout(<Component {...pageProps} />);
 }
 
 export default MyApp

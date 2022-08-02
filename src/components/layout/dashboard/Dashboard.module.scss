@@ -1,0 +1,67 @@
+$sidebarWidth: 120px;
+$appbarHeight: 120px;
+
+
+/* D A S H B O A R D */
+.layout {
+    height: calc(100vh - $appbarHeight);
+    margin-left: $sidebarWidth;
+    padding: 25px;
+}
+
+
+/* A P P B A R */
+.appbar {
+    background-color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $appbarHeight;
+    padding: 0 $sidebarWidth + 25px;
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    .menu{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        :last-child{
+            margin-left: 25px;
+        }
+    }
+}
+
+
+/* S I D E B A R */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: $sidebarWidth;
+    background-color: #121212;
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.icons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    & > * {
+        margin: 40px 0;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+
