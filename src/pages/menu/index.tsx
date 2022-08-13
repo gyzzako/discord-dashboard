@@ -1,22 +1,24 @@
 import { GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
-import { ReactElement, ReactNode } from "react";
-import { GuildMenuItem } from "../../components/guilds/GuildMenuItem";
-import { BaseLayout } from "../../components/layout/base/Base";
+import { useEffect } from "react";
+import GuildMenuItem from "../../components/guilds/GuildMenuItem";
 import { fetchMutualGuilds } from "../../utils/api";
-import { Guild } from "../../utils/types";
+import { useLoggedIn } from "../../utils/hooks/LoggedInHook";
+import { PartialGuild, NextPageWithLayout } from "../../utils/types";
 import styles from './index.module.scss';
 
 type Props = {
-    guilds: Guild[];
+    guilds: PartialGuild[];
 }
 
-type MenuPageWithLayout = NextPage<Props> & {
-    getLayout: (page: ReactElement) => ReactNode;
-}
-
-const MenuPage: MenuPageWithLayout = ({guilds}) => {
+const MenuPage: NextPageWithLayout<Props> = ({guilds}) => {
     const router = useRouter();
+    const isLoggedIn = useLoggedIn()
+
+    useEffect(() => {
+        if(!isLoggedIn) router.push("/");
+    })
+    
     return(
         <div className="container">
             <div className={styles.guilds}>
@@ -29,10 +31,6 @@ const MenuPage: MenuPageWithLayout = ({guilds}) => {
 
 export async function getServerSideProps(context: GetServerSidePropsContext){
     return await fetchMutualGuilds(context);
-}
-
-MenuPage.getLayout = function (page: ReactElement) {
-    return <BaseLayout>{page}</BaseLayout>
 }
 
 export default MenuPage;

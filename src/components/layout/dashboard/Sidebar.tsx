@@ -5,6 +5,10 @@ import { FaWrench } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import styles from "./Dashboard.module.scss";
 import { useRouter } from "next/router";
+import { PartialGuild } from "../../../utils/types";
+import { FC, memo } from "react";
+import { getIconUrl } from "../../../utils/helpers";
+import { logout } from "../../../utils/api";
 
 const routes = [
     {
@@ -24,19 +28,25 @@ const routes = [
     },
 ]
 
-export const Sidebar = () => {
+type Props = {
+    guild?: PartialGuild;
+};
+
+const Sidebar: FC<Props> = ({ guild }) => {
     const router = useRouter();
     return (
         <div className={styles.sidebar}>
-            <Image className={styles.avatar} src="/vercel.svg" height={80} width={80} alt="guild_avatar" />
+            <Image className={styles.avatar} src={getIconUrl(guild)} height={80} width={80} alt="guild_avatar" />
             <div className={styles.icons}>
                 {routes.map((route) => (
                     <div key={route.name} onClick={() => router.push(route.getPath(router.query?.id!.toString()))}>{route.icon}</div>
                 ))}
             </div>
             <div>
-                <RiLogoutCircleLine size={48}/>
+                <RiLogoutCircleLine className={styles.logout__icon} size={48} onClick={async () => await logout()}/>
             </div>
         </div>
     );
 }
+
+export default memo(Sidebar);

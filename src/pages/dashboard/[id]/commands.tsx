@@ -1,11 +1,19 @@
 import { ReactElement } from "react";
 import { DashboardLayout } from "../../../components/layout/dashboard/Dashboard";
-import { NextPageWithLayout } from "../../../utils/types";
+import { useCurrentGuild } from "../../../utils/hooks/CurrentGuildHook";
+import { NextPageWithLayout, PartialGuild } from "../../../utils/types";
 
-const CommandsPage: NextPageWithLayout = () => {
+type Props = {
+}
+
+
+const CommandsPage: NextPageWithLayout<Props> = () => {
+    const guild = useCurrentGuild();
+
     return (
         <div>
             Command Page
+            <p>{guild?.name}</p>
         </div>
     );
 }

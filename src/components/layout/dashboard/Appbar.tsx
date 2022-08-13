@@ -1,8 +1,15 @@
 import styles from "./Dashboard.module.scss";
 import { RiMenu3Line } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { FC, memo } from "react";
+import { PartialGuild } from "../../../utils/types";
 
-export const Appbar = () => {
+type Props = {
+    guild?: PartialGuild;
+};
+
+
+const Appbar: FC<Props> = ({ guild }) => {
     const router = useRouter();
     return (
         <div className={styles.appbar}>
@@ -11,8 +18,10 @@ export const Appbar = () => {
                 <p>Menu</p>
             </div>
             <div>
-                <p>GyzzakO Bot</p>
+                <p>{guild?.name || "GyzzakO Bot"}</p>
             </div>
         </div>
     );
 }
+
+export default memo(Appbar);

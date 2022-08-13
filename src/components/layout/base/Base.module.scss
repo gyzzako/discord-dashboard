@@ -14,7 +14,7 @@
 
 /* H E A D E R */
 
-.loginButton{
+.login__button{
   float: right;
   width: 250px;
   padding: 10px 25px;
@@ -28,4 +28,15 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+}
+
+.dashboard__button{
+  display: block;
+  float: right;
+  width: 150px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  text-align: center;
 }

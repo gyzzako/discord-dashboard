@@ -4,7 +4,10 @@ import { BaseLayout } from '../components/layout/base/Base'
 import styles from '../styles/home.module.scss'
 import { NextPageWithLayout } from '../utils/types'
 
-const HomePage: NextPageWithLayout = () => {
+type Props = {
+}
+
+const HomePage: NextPageWithLayout<Props> = () => {
   return (
     <div className={styles.container}>
       <Head>
